@@ -1,0 +1,22 @@
+{
+  "name": "stock-master",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mime-types": "^3.0.1",
+    "multer": "^2.0.2",
+    "nodemon": "^3.1.10",
+    "sqlite3": "^5.1.7"
+  }
+}
