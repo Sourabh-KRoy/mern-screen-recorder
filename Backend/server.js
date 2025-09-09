@@ -20,7 +20,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://mern-screen-recorder-five.vercel.app/",
+      "https://mern-screen-recorder-five.vercel.app",
       true,
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
