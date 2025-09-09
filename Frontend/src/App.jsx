@@ -1,8 +1,5 @@
-// App.jsx
-// React component for screen recording with Tailwind CSS.
-// Handles: Start/Stop, timer (3min max), preview, download, upload, and listing uploaded recordings.
-
 import React, { useEffect, useRef, useState } from "react";
+import { apiBaseUrl } from "./apiurl";
 
 export default function App() {
   const [recording, setRecording] = useState(false);
@@ -165,7 +162,7 @@ export default function App() {
     form.append("file", blobObject, filename);
 
     try {
-      const res = await fetch("http://localhost:3001/api/recordings", {
+      const res = await fetch(`${apiBaseUrl}/api/recordings`, {
         method: "POST",
         body: form,
       });
@@ -182,7 +179,7 @@ export default function App() {
 
   async function fetchRecordings() {
     try {
-      const res = await fetch("http://localhost:3001/api/recordings");
+      const res = await fetch(`${apiBaseUrl}/api/recordings`);
       if (!res.ok) return;
       const arr = await res.json();
       setRecordings(Array.isArray(arr) ? arr : []);
@@ -301,11 +298,10 @@ export default function App() {
                     {humanSize(r.size)} •{" "}
                     {new Date(r.createdAt).toLocaleString()}
                   </div>
-                  {/* ✅ Use fileUrl instead of url */}
+                  {/* Use fileUrl instead of url */}
                   <video
                     className="w-full rounded mt-2"
-                    // src={r.fileUrl}
-                    src={`http://localhost:3001${r.url}`} // prepend server host
+                    src={`${apiBaseUrl}${r.url}`} // prepend server host
                     controls
                   />
                 </div>

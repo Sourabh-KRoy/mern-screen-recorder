@@ -1,5 +1,3 @@
-// backend/server.js
-// backend/server.js
 import express from "express";
 import multer from "multer";
 import path from "path";
@@ -17,15 +15,19 @@ const PORT = process.env.PORT || 3001;
 const UPLOAD_DIR = path.join(__dirname, "uploads");
 if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR);
 
+//cors setup
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://mern-screen-recorder-five.vercel.app/",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true,
   })
 );
 
-// --- SQLite Setup ---
+// SQLite Setup
 const db = new sqlite3.Database(path.join(__dirname, "database.db"));
 
 db.serialize(() => {
@@ -39,7 +41,7 @@ db.serialize(() => {
   `);
 });
 
-// --- Multer Setup ---
+// Multer Setup
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, UPLOAD_DIR),
   filename: (req, file, cb) => {
@@ -50,9 +52,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// --- Routes ---
-
-// POST /api/recordings → upload a recording
+//Routes
 app.post("/api/recordings", upload.single("file"), (req, res) => {
   if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
@@ -73,7 +73,6 @@ app.post("/api/recordings", upload.single("file"), (req, res) => {
   );
 });
 
-// GET /api/recordings → list all recordings
 app.get("/api/recordings", (req, res) => {
   db.all(
     "SELECT * FROM recordings ORDER BY createdAt DESC",
@@ -89,7 +88,6 @@ app.get("/api/recordings", (req, res) => {
   );
 });
 
-// GET /api/recordings/:id → fetch single recording metadata
 app.get("/api/recordings/:id", (req, res) => {
   const { id } = req.params;
   db.get("SELECT * FROM recordings WHERE id = ?", [id], (err, row) => {
