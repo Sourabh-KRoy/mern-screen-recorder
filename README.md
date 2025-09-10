@@ -13,11 +13,11 @@ Make sure you have installed:
 ### 2️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/your-username/mern-screen-recorder.git
+cd mern-screen-recorder
 ```
 
-4️⃣ Backend Setup (Node + Express + SQLite)
+### 3️⃣ Backend Setup (Node + Express + SQLite)
 
 Step 1:
 cd backend
@@ -31,7 +31,7 @@ node server.js
 Backend runs at:
 http://localhost:3001
 
-5️⃣ Frontend Setup (React + Vite)
+### 4️⃣ Frontend Setup (React + Vite)
 
 Step 1:
 cd backend
