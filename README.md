@@ -8,8 +8,6 @@ Make sure you have installed:
 - npm (comes with Node) or yarn
 - Git
 
----
-
 ### 2️⃣ Clone the Repository
 
 ```bash
@@ -44,3 +42,5 @@ npm run dev
 
 Frontend runs at:
 http://localhost:5173
+
+---
